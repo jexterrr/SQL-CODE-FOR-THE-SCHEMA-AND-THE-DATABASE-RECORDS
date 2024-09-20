@@ -1,0 +1,138 @@
+-- Create the Schools table
+CREATE TABLE Schools (
+    School_ID INT PRIMARY KEY,
+    School_Name VARCHAR(100),
+    Location VARCHAR(100),
+    School_Principal VARCHAR(100)
+);
+
+-- Create the Users table (for students, teachers, and admins)
+CREATE TABLE Users (
+    User_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Role VARCHAR(20),  -- student, teacher, admin
+    School_ID INT,
+    Password VARCHAR(100),
+    FOREIGN KEY (School_ID) REFERENCES Schools(School_ID)
+);
+
+-- Create the Courses table
+CREATE TABLE Courses (
+    Course_ID INT PRIMARY KEY,
+    Course_Name VARCHAR(100),
+    Course_Description VARCHAR(255),
+    Teacher_ID INT,
+    School_ID INT,
+    FOREIGN KEY (Teacher_ID) REFERENCES Users(User_ID),
+    FOREIGN KEY (School_ID) REFERENCES Schools(School_ID)
+);
+
+-- Create the Enrollments table
+CREATE TABLE Enrollments (
+    Enrollment_ID INT PRIMARY KEY,
+    Student_ID INT,
+    Course_ID INT,
+    Enrollment_Date DATE,
+    FOREIGN KEY (Student_ID) REFERENCES Users(User_ID),
+    FOREIGN KEY (Course_ID) REFERENCES Courses(Course_ID)
+);
+
+-- Create the Assignments table
+CREATE TABLE Assignments (
+    Assignment_ID INT PRIMARY KEY,
+    Course_ID INT,
+    Assignment_Title VARCHAR(100),
+    Due_Date DATE,
+    Max_Score INT,
+    FOREIGN KEY (Course_ID) REFERENCES Courses(Course_ID)
+);
+
+-- Create the Submissions table
+CREATE TABLE Submissions (
+    Submission_ID INT PRIMARY KEY,
+    Assignment_ID INT,
+    Student_ID INT,
+    Submission_Date DATE,
+    Score INT,
+    FOREIGN KEY (Assignment_ID) REFERENCES Assignments(Assignment_ID),
+    FOREIGN KEY (Student_ID) REFERENCES Users(User_ID)
+);
+
+-- Insert sample data into the Schools table
+INSERT INTO Schools (School_ID, School_Name, Location, School_Principal) VALUES
+(1, 'Rizal Public School', 'Manila', 'Maria Santos'),
+(2, 'Quezon Public School', 'Quezon City', 'Jose Garcia'),
+(3, 'Cebu Public School', 'Cebu City', 'Ana Reyes'),
+(4, 'Davao Public School', 'Davao City', 'Luis Torres'),
+(5, 'Baguio Public School', 'Baguio City', 'Isabel Aquino'),
+(6, 'Laguna Public School', 'Laguna', 'Pedro Cruz'),
+(7, 'Iloilo Public School', 'Iloilo City', 'Carmela Dela Cruz'),
+(8, 'Batangas Public School', 'Batangas', 'Rosario Mendoza'),
+(9, 'Pampanga Public School', 'Pampanga', 'Elena Santiago'),
+(10, 'Zamboanga Public School', 'Zamboanga', 'Arnaldo Vega');
+
+-- Insert sample data into the Users table
+INSERT INTO Users (User_ID, Name, Email, Role, School_ID, Password) VALUES
+(1, 'Juan Dela Cruz', 'juan@example.com', 'student', 1, 'password123'),
+(2, 'Maria Clara', 'maria@example.com', 'student', 2, 'password123'),
+(3, 'Jose Rizal', 'jose@example.com', 'teacher', 1, 'password123'),
+(4, 'Emilio Aguinaldo', 'emilio@example.com', 'teacher', 3, 'password123'),
+(5, 'Andres Bonifacio', 'andres@example.com', 'admin', 1, 'password123'),
+(6, 'Manny Pacquiao', 'manny@example.com', 'student', 4, 'password123'),
+(7, 'Lea Salonga', 'lea@example.com', 'student', 5, 'password123'),
+(8, 'Liza Soberano', 'liza@example.com', 'teacher', 2, 'password123'),
+(9, 'Ninoy Aquino', 'ninoy@example.com', 'admin', 3, 'password123'),
+(10, 'Pia Wurtzbach', 'pia@example.com', 'teacher', 4, 'password123');
+
+-- Insert sample data into the Courses table
+INSERT INTO Courses (Course_ID, Course_Name, Course_Description, Teacher_ID, School_ID) VALUES
+(1, 'Mathematics', 'Basic mathematics for grade 7', 3, 1),
+(2, 'English', 'English grammar and writing', 4, 3),
+(3, 'Science', 'Introduction to physical science', 3, 1),
+(4, 'History', 'Philippine History and culture', 8, 2),
+(5, 'Physical Education', 'Basic physical education', 10, 4),
+(6, 'Music', 'Introduction to music theory', 4, 3),
+(7, 'Art', 'Visual arts and design', 8, 2),
+(8, 'Biology', 'Introduction to human biology', 10, 4),
+(9, 'Physics', 'Introduction to physics', 3, 1),
+(10, 'Chemistry', 'Basic chemistry principles', 3, 1);
+
+-- Insert sample data into the Enrollments table
+INSERT INTO Enrollments (Enrollment_ID, Student_ID, Course_ID, Enrollment_Date) VALUES
+(1, 1, 1, '2024-06-10'),
+(2, 2, 4, '2024-06-10'),
+(3, 1, 3, '2024-06-12'),
+(4, 6, 5, '2024-06-15'),
+(5, 7, 6, '2024-06-20'),
+(6, 1, 9, '2024-06-22'),
+(7, 2, 7, '2024-06-25'),
+(8, 6, 8, '2024-06-28'),
+(9, 7, 10, '2024-07-02'),
+(10, 2, 4, '2024-07-05');
+
+-- Insert sample data into the Assignments table
+INSERT INTO Assignments (Assignment_ID, Course_ID, Assignment_Title, Due_Date, Max_Score) VALUES
+(1, 1, 'Algebra Homework', '2024-06-20', 100),
+(2, 2, 'Essay on Philippine History', '2024-06-25', 50),
+(3, 3, 'Physics Lab Report', '2024-06-30', 100),
+(4, 4, 'Art Project', '2024-07-05', 75),
+(5, 5, 'PE Fitness Test', '2024-07-10', 50),
+(6, 6, 'Music Composition', '2024-07-15', 100),
+(7, 7, 'Biology Lab Report', '2024-07-20', 100),
+(8, 8, 'Chemistry Assignment', '2024-07-25', 50),
+(9, 9, 'Physics Problem Set', '2024-07-30', 100),
+(10, 10, 'Chemistry Lab Report', '2024-08-05', 100);
+
+-- Insert sample data into the Submissions table
+INSERT INTO Submissions (Submission_ID, Assignment_ID, Student_ID, Submission_Date, Score) VALUES
+(1, 1, 1, '2024-06-19', 95),
+(2, 2, 2, '2024-06-24', 45),
+(3, 3, 1, '2024-06-29', 88),
+(4, 4, 6, '2024-07-04', 70),
+(5, 5, 7, '2024-07-09', 48),
+(6, 6, 1, '2024-07-14', 90),
+(7, 7, 2, '2024-07-19', 80),
+(8, 8, 6, '2024-07-24', 50),
+(9, 9, 1, '2024-07-29', 85),
+(10, 10, 2, '2024-08-04', 95);
