@@ -59,7 +59,6 @@ CREATE TABLE Submissions (
     FOREIGN KEY (Student_ID) REFERENCES Users(User_ID)
 );
 
--- Insert sample data into the Schools table
 INSERT INTO Schools (School_ID, School_Name, Location, School_Principal) VALUES
 (1, 'Rizal Public School', 'Manila', 'Maria Santos'),
 (2, 'Quezon Public School', 'Quezon City', 'Jose Garcia'),
@@ -72,7 +71,6 @@ INSERT INTO Schools (School_ID, School_Name, Location, School_Principal) VALUES
 (9, 'Pampanga Public School', 'Pampanga', 'Elena Santiago'),
 (10, 'Zamboanga Public School', 'Zamboanga', 'Arnaldo Vega');
 
--- Insert sample data into the Users table
 INSERT INTO Users (User_ID, Name, Email, Role, School_ID, Password) VALUES
 (1, 'Juan Dela Cruz', 'juan@example.com', 'student', 1, 'password123'),
 (2, 'Maria Clara', 'maria@example.com', 'student', 2, 'password123'),
@@ -85,7 +83,6 @@ INSERT INTO Users (User_ID, Name, Email, Role, School_ID, Password) VALUES
 (9, 'Ninoy Aquino', 'ninoy@example.com', 'admin', 3, 'password123'),
 (10, 'Pia Wurtzbach', 'pia@example.com', 'teacher', 4, 'password123');
 
--- Insert sample data into the Courses table
 INSERT INTO Courses (Course_ID, Course_Name, Course_Description, Teacher_ID, School_ID) VALUES
 (1, 'Mathematics', 'Basic mathematics for grade 7', 3, 1),
 (2, 'English', 'English grammar and writing', 4, 3),
@@ -98,7 +95,6 @@ INSERT INTO Courses (Course_ID, Course_Name, Course_Description, Teacher_ID, Sch
 (9, 'Physics', 'Introduction to physics', 3, 1),
 (10, 'Chemistry', 'Basic chemistry principles', 3, 1);
 
--- Insert sample data into the Enrollments table
 INSERT INTO Enrollments (Enrollment_ID, Student_ID, Course_ID, Enrollment_Date) VALUES
 (1, 1, 1, '2024-06-10'),
 (2, 2, 4, '2024-06-10'),
@@ -111,7 +107,6 @@ INSERT INTO Enrollments (Enrollment_ID, Student_ID, Course_ID, Enrollment_Date) 
 (9, 7, 10, '2024-07-02'),
 (10, 2, 4, '2024-07-05');
 
--- Insert sample data into the Assignments table
 INSERT INTO Assignments (Assignment_ID, Course_ID, Assignment_Title, Due_Date, Max_Score) VALUES
 (1, 1, 'Algebra Homework', '2024-06-20', 100),
 (2, 2, 'Essay on Philippine History', '2024-06-25', 50),
@@ -124,7 +119,6 @@ INSERT INTO Assignments (Assignment_ID, Course_ID, Assignment_Title, Due_Date, M
 (9, 9, 'Physics Problem Set', '2024-07-30', 100),
 (10, 10, 'Chemistry Lab Report', '2024-08-05', 100);
 
--- Insert sample data into the Submissions table
 INSERT INTO Submissions (Submission_ID, Assignment_ID, Student_ID, Submission_Date, Score) VALUES
 (1, 1, 1, '2024-06-19', 95),
 (2, 2, 2, '2024-06-24', 45),
